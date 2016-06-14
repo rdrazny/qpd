@@ -1,9 +1,10 @@
 {% macro load_chart() %}
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
 <script type='text/javascript'>//<![CDATA[
-google.charts.load('current', {packages: ['corechart', 'line']});
+google.charts.load('current', {packages: ['corechart', 'bar']});
 
 //]]>
 </script>
@@ -20,11 +21,13 @@ function drawLineColors() {
       data.addColumn('number', 'Passed');
       data.addColumn('number', 'Failed');
       data.addColumn('number', 'Skipped');
-
+      console.log({{ rows|safe }});
       data.addRows({{ rows|safe }});
 
 var options = {
         title: 'Automation Results',
+        isStacked: true,
+        orientation: 'horizontal',
         width: "50%",
         height: 400,
 
@@ -32,13 +35,14 @@ var options = {
           title: 'Build'
         },
         vAxis: {
-          title: '# Automated Tests'
+          title: '# Automated Tests',
+          //scaleType: 'log',
         },
         colors: ['#5cb85c', '#d9534f', '#337ab7']
       };
 
       var chart = new
-      google.visualization.LineChart(document.getElementById('{{ id }}'));
+      google.visualization.ColumnChart(document.getElementById('{{ id }}'));
       chart.draw(data, options);
     }
 

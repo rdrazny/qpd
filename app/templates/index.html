@@ -11,8 +11,16 @@
       {{ macros.testrun_table(test_runs) }}
     </div>
     <div class="col-md-6">
+    <div class="row">
       <h1>Latest Test Runs</h1>
       {{ macros.chart('runs-chart', data) }}
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Romans corner</h1>
+        {{ data }}
+      </div>
     </div>
   </div>
 </div>
